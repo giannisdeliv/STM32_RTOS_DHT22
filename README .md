@@ -26,9 +26,9 @@ Three concurrent FreeRTOS tasks communicate through a queue and an event group:
 
 ```
 vSensorTask  (P=2) ──► xSensorQueue ──► vUartTask   (P=1)
-     │                                       │
-     └── xCheckinEG (event bit) ──► vWatchdogTask (P=3)
-                                        │
+       ||                                     ||
+     xCheckinEG (event bit) ──► vWatchdogTask (P=3)
+                                        ||
                                    HAL_IWDG_Refresh()
 ```
 
@@ -76,8 +76,4 @@ Core/
 
 
 
-
-
-Developed in **STM32CubeIDE**. Open the `.project` file directly. No external dependencies beyond the STM32F4 HAL and FreeRTOS middleware, both managed by CubeMX.
-UART output is visible on the ST-Link virtual COM port at 115200 8N1.
 
