@@ -24,13 +24,13 @@ Watchdog -> IWDG on LSI, ~3s timeout
 
 Three concurrent FreeRTOS tasks communicate through a queue and an event group:
 
-
+```
 vSensorTask  (P=2) ──► xSensorQueue ──► vUartTask   (P=1)
-      |                                      │
-      xCheckinEG (event bit) ──► vWatchdogTask (P=3)
+     │                                       │
+     └── xCheckinEG (event bit) ──► vWatchdogTask (P=3)
                                         │
                                    HAL_IWDG_Refresh()
-
+```
 
 1)vSensorTask
 Reads the DHT22 every 2 seconds. The read is wrapped in `vTaskSuspendAll()` / `xTaskResumeAll()` to prevent context switches from corrupting the 1-wire timing, while keeping hardware interrupts (and the HAL tick) active. If succesful, it pushes the result to the queue and sets its check-in bit in the event group.
@@ -58,21 +58,21 @@ Unlike the bare-metal predecessor where the watchdog was refreshed unconditional
 
 *Project structure
 
-
+```
 Core/
 ├── Inc/
-│   ├── dht22.h
+│   ├── dht22.h          <- same as the previous project
 │   ├── sensor_task.h
 │   ├── uart_task.h
 │   ├── watchdog_task.h
 │   └── FreeRTOSConfig.h
 └── Src/
-    ├── dht22.c           <- unchanged from predecessor
+    ├── dht22.c           <- same as the previous project
     ├── main.c
     ├── sensor_task.c
     ├── uart_task.c
     └── watchdog_task.c
-`
+```
 
 
 
