@@ -1,0 +1,23 @@
+# Build output
+Debug/
+Release/
+
+# STM32CubeIDE local settings
+.settings/
+
+# ST HAL and FreeRTOS — managed by CubeMX, not tracked
+Drivers/
+Middlewares/
+
+# Compiled files
+*.o
+*.d
+*.elf
+*.map
+*.list
+*.su
+*.cyclo
+
+# OS
+.DS_Store
+Thumbs.db
