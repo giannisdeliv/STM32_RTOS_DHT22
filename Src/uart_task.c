@@ -15,7 +15,7 @@ void vUartTask(void *pvParameters)
     {
         if (xQueueReceive(xSensorQueue, &rx, portMAX_DELAY) == pdTRUE)
         {
-            int len = snprintf(buf, sizeof(buf),
+            int len = snprintf(buf, sizeof(buf),                               // sprintf=format and store a string in a buffer, with built-in protection against buffer overflows
                                "Temp: %.1f C  |  Hum: %.1f %%\r\n",
                                rx.temperature, rx.humidity);
 
