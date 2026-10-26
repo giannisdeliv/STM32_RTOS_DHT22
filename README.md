@@ -33,17 +33,17 @@ vSensorTask  (P=2) ──► xSensorQueue ──► vUartTask   (P=1)
 ```
 
 1)vSensorTask
-Reads the DHT22 every 2 seconds. The read is wrapped in `vTaskSuspendAll()` / `xTaskResumeAll()` to prevent context switches from corrupting the 1-wire timing, while keeping hardware interrupts (and the HAL tick) active. If succesful, it pushes the result to the queue and sets its check-in bit in the event group.
+Reads the DHT22 every 2 seconds. The read is wrapped in vTaskSuspendAll() / xTaskResumeAll() to prevent context switches from corrupting the 1-wire timing, while keeping hardware interrupts (and the HAL tick) active. If succesful, it pushes the result to the queue and sets its check-in bit in the event group.
 
 2)vUartTask
-Blocks on the queue indefinitely. When data arrives, it formats the string and transmits via **DMA** (non-blocking). It then waits on a binary semaphore that is given by the `HAL_UART_TxCpltCallback` ISR, so the task only proceeds once the transfer is complete.
+Blocks on the queue indefinitely. When data arrives, it formats the string and transmits via **DMA** (non-blocking). It then waits on a binary semaphore that is given by the "HAL_UART_TxCpltCallback" ISR, so the task only proceeds once the transfer is complete.
 
 3)vWatchdogTask
 Runs every 500ms at the highest priority. It inspects the event group for check-in bits from all critical tasks. Only if all bits are set does it refresh the IWDG and clear the bits. If any task misses a cycle, the watchdog is withheld and the system resets after ~3 seconds — the correct behaviour for a fault.
 
 ---
 
-*Key technical points
+Key technical points
 
 1)vTaskSuspendAll() instead of taskENTER_CRITICAL()  
 taskENTER_CRITICAL() raises BASEPRI, which masks the TIM1 interrupt used as the HAL timebase. This causes HAL_Delay() inside the DHT22 driver to hang indefinitely. vTaskSuspendAll() disables the scheduler without masking hardware interrupts, so the driver timing remains correct.
@@ -56,7 +56,7 @@ Unlike the bare-metal predecessor where the watchdog was refreshed unconditional
 
 
 
-*Project structure
+Project structure
 
 ```
 Core/
