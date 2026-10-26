@@ -61,13 +61,13 @@ Project structure
 ```
 Core/
     Inc/
-        dht22.h          //same as the previous project(see my repo)
+        dht22.h          //same as the previous project(you can check my repo - STM32 Humidity Sensor)
         sensor_task.h
         uart_task.h
         watchdog_task.h
         FreeRTOSConfig.h
     Src/
-        dht22.c           //same as the previous project(see my repo)
+        dht22.c           //same as the previous project(you can check my repo - - STM32 Humidity Sensor)
         main.c
         sensor_task.c
         uart_task.c
