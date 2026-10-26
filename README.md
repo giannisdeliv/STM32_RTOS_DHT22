@@ -60,18 +60,18 @@ Project structure
 
 ```
 Core/
-├── Inc/
-│   ├── dht22.h          <- same as the previous project
-│   ├── sensor_task.h
-│   ├── uart_task.h
-│   ├── watchdog_task.h
-│   └── FreeRTOSConfig.h
-└── Src/
-    ├── dht22.c           <- same as the previous project
-    ├── main.c
-    ├── sensor_task.c
-    ├── uart_task.c
-    └── watchdog_task.c
+    Inc/
+        dht22.h          //same as the previous project(see my repo)
+        sensor_task.h
+        uart_task.h
+        watchdog_task.h
+        FreeRTOSConfig.h
+    Src/
+        dht22.c           //same as the previous project(see my repo)
+        main.c
+        sensor_task.c
+        uart_task.c
+        watchdog_task.c
 ```
 
 
