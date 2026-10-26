@@ -43,7 +43,7 @@ Runs every 500ms at the highest priority. It inspects the event group for check-
 
 ---
 
-Key technical points
+Key points
 
 1)vTaskSuspendAll() instead of taskENTER_CRITICAL()  
 taskENTER_CRITICAL() raises BASEPRI, which masks the TIM1 interrupt used as the HAL timebase. This causes HAL_Delay() inside the DHT22 driver to hang indefinitely. vTaskSuspendAll() disables the scheduler without masking hardware interrupts, so the driver timing remains correct.
